@@ -50,8 +50,9 @@
 
         function displayMessage(messageData) {
             const messageBox = $('#messageBox');
-            // 수신된 메시지에서 message만 추출하여 추가
-            messageBox.append(`<div class="alert alert-info">`[${messageData.body.id}] ${messageData.body.username}: ${messageData.body.message}`</div>`);
+
+            // 템플릿 리터럴 사용 시, 전체를 백틱(`)으로 감싸야 함
+            messageBox.append(`<div class="alert alert-info">[${messageData.body.id}] ${messageData.body.username}: ${messageData.body.message}</div>`);
             messageBox.scrollTop(messageBox[0].scrollHeight);
         }
 
