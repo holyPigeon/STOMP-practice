@@ -51,9 +51,27 @@
         function displayMessage(messageData) {
             const messageBox = $('#messageBox');
 
-            // 템플릿 리터럴 사용 시, 전체를 백틱(`)으로 감싸야 함
-            messageBox.append(`<div class="alert alert-info">[${messageData.body.id}] ${messageData.body.username}: ${messageData.body.message}</div>`);
-            messageBox.scrollTop(messageBox[0].scrollHeight);
+            try {
+                // JSON 데이터 파싱
+                const parsedData = JSON.parse(messageData);
+
+                // 필요한 데이터 추출
+                const id = parsedData.body.id;
+                const username = parsedData.body.username;
+                const message = parsedData.body.message;
+
+                // 메시지를 원하는 형식으로 출력
+                messageBox.append(`
+            <div class="alert alert-info">
+                [${id}] ${username}: ${message}
+            </div>
+        `);
+
+                // 스크롤을 가장 아래로 이동
+                messageBox.scrollTop(messageBox[0].scrollHeight);
+            } catch (error) {
+                console.error("메시지 파싱 오류:", error);
+            }
         }
 
         $(function () {
