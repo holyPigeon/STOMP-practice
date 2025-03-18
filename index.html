@@ -51,7 +51,7 @@
         function displayMessage(messageData) {
             const messageBox = $('#messageBox');
             // 수신된 메시지에서 message만 추출하여 추가
-            messageBox.append(`<div class="alert alert-info">`${messageData.body.username}: ${messageData.body.message}`</div>`);
+            messageBox.append(`<div class="alert alert-info">`[${messageData.body.id}] ${messageData.body.username}: ${messageData.body.message}`</div>`);
             messageBox.scrollTop(messageBox[0].scrollHeight);
         }
 
