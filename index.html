@@ -57,9 +57,9 @@
                 const parsedData = JSON.parse(messageData);
 
                 // 필요한 데이터 추출
-                const id = parsedData.body.id;
-                const nickname = parsedData.body.nickname;
-                const message = parsedData.body.message;
+                const id = parsedData.id;
+                const nickname = parsedData.nickname;
+                const message = parsedData.message;
 
                 // 메시지를 원하는 형식으로 출력
                 messageBox.append(`
