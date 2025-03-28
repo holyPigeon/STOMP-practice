@@ -14,6 +14,7 @@
     <script type="text/javascript">
         let stompClient; // stompClient 변수를 전역으로 설정
         let subscriptions = {}; // 구독 정보를 저장할 객체
+        let JWT_TOKEN = ""; // 전역 변수로 선언
 
         function connectWebSocket() {
             const url = $('#websocketUrl').val(); // 웹소켓 URL 가져오기
@@ -110,8 +111,19 @@
                 $(this).hide(); // 구독 해제 버튼 숨김
             });
 
+            // Access Token 입력 버튼 클릭 시 토큰 저장
+            $('#accessTokenBtn').click(function () {
+                JWT_TOKEN = $('#accessToken').val().trim(); // 입력값 저장
+                alert('Access Token이 저장되었습니다.');
+            });
+
             // 메시지 전송 버튼 클릭 시
             $('#sendBtn').click(function () {
+                if (!JWT_TOKEN) {
+                    alert("Access Token을 입력하세요!");
+                    return;
+                }
+                
                 const destinationPath = $('#destinationPath').val(); // 대상 경로 가져오기
                 const messageJson = $('#message').val(); // JSON 형태의 메시지 가져오기
                 
@@ -142,6 +154,12 @@
         <div id="subscriptionList"></div>
         <div class="input-group mb-3">
             <button id="addSubscriptionBtn" class="btn btn-secondary">ADD</button>
+        </div>
+
+        <h1>Access Token</h1>
+        <div class="mb-3 input-group" style="width: 500px;">
+            <input type="text" id="accessToken" class="form-control" placeholder="ws://localhost:8080/ws"/>
+            <button id="accessTokenBtn" class="btn btn-primary"></button>
         </div>
 
         <h2>SEND MESSAGE</h2>
