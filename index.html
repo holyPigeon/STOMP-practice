@@ -19,7 +19,7 @@
             const url = $('#websocketUrl').val(); // 웹소켓 URL 가져오기
 
             // websocket URL을 사용하여 stompClient 초기화
-            stompClient = Stomp.over(new SockJS(url))
+            stompClient = Stomp.client(url);
             stompClient.connect({}, stompConnectHandler, stompErrorHandler);
         }
 
