@@ -114,10 +114,14 @@
             $('#sendBtn').click(function () {
                 const destinationPath = $('#destinationPath').val(); // 대상 경로 가져오기
                 const messageJson = $('#message').val(); // JSON 형태의 메시지 가져오기
-
+                
+                const headers = {
+                    Authorization: `Bearer ${JWT_TOKEN}`,
+                };
+                
                 try {
                     const message = JSON.parse(messageJson); // JSON으로 변환
-                    stompClient.send(destinationPath, {}, JSON.stringify(message)); // 메시지 발행
+                    stompClient.send(destinationPath, headers, JSON.stringify(message)); // 메시지 발행
                 } catch (error) {
                     alert('유효한 JSON을 입력하세요!'); // JSON 오류 처리
                 }
