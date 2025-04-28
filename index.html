@@ -18,9 +18,10 @@
 
         function connectWebSocket() {
             const url = $('#websocketUrl').val(); // 웹소켓 URL 가져오기
+            const socket = new SockJS(url); // SockJS를 사용해서 소켓 생성
 
-            // websocket URL을 사용하여 stompClient 초기화
-            stompClient = Stomp.client(url);
+            // SockJS 소켓을 통해 STOMP 클라이언트 생성
+            stompClient = Stomp.over(socket);
             stompClient.connect({}, stompConnectHandler, stompErrorHandler);
         }
 
